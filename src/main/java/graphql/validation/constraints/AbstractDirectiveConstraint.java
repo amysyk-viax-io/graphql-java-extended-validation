@@ -4,14 +4,7 @@ import graphql.Assert;
 import graphql.GraphQLError;
 import graphql.PublicSpi;
 import graphql.Scalars;
-import graphql.schema.GraphQLArgument;
-import graphql.schema.GraphQLDirective;
-import graphql.schema.GraphQLFieldDefinition;
-import graphql.schema.GraphQLFieldsContainer;
-import graphql.schema.GraphQLInputObjectType;
-import graphql.schema.GraphQLInputType;
-import graphql.schema.GraphQLScalarType;
-import graphql.schema.GraphQLTypeUtil;
+import graphql.schema.*;
 import graphql.validation.rules.ValidationEnvironment;
 import graphql.validation.util.DirectivesAndTypeWalker;
 import graphql.validation.util.Util;
@@ -162,7 +155,7 @@ public abstract class AbstractDirectiveConstraint implements DirectiveConstraint
      * @return true ifits oneof them
      */
     protected boolean isOneOfTheseTypes(GraphQLInputType inputType, GraphQLScalarType... scalarTypes) {
-        GraphQLInputType unwrappedType = Util.unwrapNonNull(inputType);
+        GraphQLNamedInputType unwrappedType = (GraphQLNamedInputType) Util.unwrapNonNull(inputType);
         for (GraphQLScalarType scalarType : scalarTypes) {
             if (unwrappedType.getName().equals(scalarType.getName())) {
                 return true;
